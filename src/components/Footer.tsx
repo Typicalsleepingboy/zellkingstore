@@ -103,7 +103,7 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
           isDarkMode ? 'border-slate-700/50' : 'border-slate-200/50'
         }`}>
           <p className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-            © 2024 Zellsking. All rights reserved. | JKT48 Member Messages Platform
+          © {new Date().getFullYear()} Zellsking. All rights reserved.
           </p>
         </div>
       </div>

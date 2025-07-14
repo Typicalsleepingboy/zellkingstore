@@ -198,7 +198,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
                     className="w-20 h-20 rounded-2xl object-cover mr-8 border-2 border-blue-400/30 shadow-lg"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400';
+                      target.src = 'https://res.cloudinary.com/doig4w6cm/image/fetch/f_webp,q_80,ar_0.8,g_face:center,w_180,c_fill/https://res.cloudinary.com/haymzm4wp/image/upload/v1696626938/assets/img/default-anime-avatar_ms7sea.webp';
                     }}
                   />
                   <div className="flex-1">
