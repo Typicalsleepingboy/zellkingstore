@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {Heart, Sparkles } from 'lucide-react';
+import {Heart, Sparkles, Search } from 'lucide-react';
 import MemberCard from './components/MemberCard';
 import SubscribeModal from './components/SubscribeModal';
 import DarkModeToggle from './components/DarkModeToggle';
@@ -15,6 +15,8 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [filter, setFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode');
@@ -61,6 +63,12 @@ function App() {
     setShowLeaderboard(false);
   };
 
+  const filteredMembers = members.filter(member => {
+    const matchesFilter = filter === 'all' || member.generation === filter;
+    const matchesSearch = member.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
   if (showLeaderboard) {
     return (
       <div className={`min-h-screen transition-all duration-700 relative ${
@@ -69,12 +77,12 @@ function App() {
           : 'bg-gradient-to-br from-slate-50 via-white to-slate-100'
       }`}>
         {/* Dotted Background Pattern */}
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-30">
           <div className={`w-full h-full ${
             isDarkMode 
-              ? 'bg-[radial-gradient(circle_at_1px_1px,rgba(116,180,218,0.3)_1px,transparent_0)]' 
-              : 'bg-[radial-gradient(circle_at_1px_1px,rgba(116,180,218,0.2)_1px,transparent_0)]'
-          } bg-[length:24px_24px]`}></div>
+              ? 'bg-[radial-gradient(#3b82f6_1px,transparent_1px)] bg-[length:20px_20px]' 
+              : 'bg-[radial-gradient(#60a5fa_1px,transparent_1px)] bg-[length:20px_20px]'
+          }`}></div>
         </div>
 
         <div className="relative z-10">
@@ -91,12 +99,12 @@ function App() {
         : 'bg-gradient-to-br from-slate-50 via-white to-slate-100'
     }`}>
       {/* Dotted Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-30">
         <div className={`w-full h-full ${
           isDarkMode 
-            ? 'bg-[radial-gradient(circle_at_1px_1px,rgba(116,180,218,0.3)_1px,transparent_0)]' 
-            : 'bg-[radial-gradient(circle_at_1px_1px,rgba(116,180,218,0.2)_1px,transparent_0)]'
-        } bg-[length:24px_24px]`}></div>
+            ? 'bg-[radial-gradient(#3b82f6_1px,transparent_1px)] bg-[length:20px_20px]' 
+            : 'bg-[radial-gradient(#60a5fa_1px,transparent_1px)] bg-[length:20px_20px]'
+        }`}></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-6 py-8">
@@ -147,6 +155,72 @@ function App() {
         {/* Leaderboard Banner */}
         <LeaderboardBanner onViewLeaderboard={handleViewLeaderboard} isDarkMode={isDarkMode} />
 
+        {/* Filter and Search Section */}
+        <div className={`mb-8 p-4 rounded-2xl border backdrop-blur-sm ${
+          isDarkMode 
+            ? 'bg-slate-800/50 border-slate-700/50' 
+            : 'bg-white/80 border-slate-200/50'
+        }`}>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setFilter('all')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  filter === 'all'
+                    ? 'bg-blue-500 text-white'
+                    : isDarkMode
+                      ? 'bg-slate-700 text-slate-200 hover:bg-slate-600'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => setFilter('Anggota JKT48')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  filter === 'Anggota JKT48'
+                    ? 'bg-blue-500 text-white'
+                    : isDarkMode
+                      ? 'bg-slate-700 text-slate-200 hover:bg-slate-600'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                Members
+              </button>
+              <button
+                onClick={() => setFilter('Trainee JKT48')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  filter === 'Trainee JKT48'
+                    ? 'bg-blue-500 text-white'
+                    : isDarkMode
+                      ? 'bg-slate-700 text-slate-200 hover:bg-slate-600'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`}
+              >
+                Trainees
+              </button>
+            </div>
+            <div className="flex-1">
+              <div className={`flex items-center px-4 py-2 rounded-xl border ${
+                isDarkMode
+                  ? 'bg-slate-700 border-slate-600'
+                  : 'bg-white border-slate-200'
+              }`}>
+                <Search className={`w-5 h-5 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'}`} />
+                <input
+                  type="text"
+                  placeholder="Search member..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={`ml-2 w-full bg-transparent border-none focus:outline-none ${
+                    isDarkMode ? 'text-white placeholder:text-slate-400' : 'text-slate-900 placeholder:text-slate-400'
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Available Members */}
         <div className="flex items-center mb-8">
           <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -157,12 +231,12 @@ function App() {
               ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' 
               : 'bg-blue-100/80 text-blue-700 border-blue-200/50'
           }`}>
-            {members.length} members
+            {filteredMembers.length} members
           </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-6 gap-3">
-          {members.map((member) => (
+          {filteredMembers.map((member) => (
             <MemberCard
               key={member.id}
               member={member}
