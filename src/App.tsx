@@ -40,13 +40,20 @@ function App() {
   };
 
   const handleMessage = (member: Member) => {
-    const message = `Hi ${member.name}! I would like to subscribe to your messages for ${new Intl.NumberFormat('id-ID', {
+    const formattedPrice = new Intl.NumberFormat('id-ID', {
       style: 'currency',
       currency: 'IDR',
       minimumFractionDigits: 0,
-    }).format(member.price)} for 30 days.`;
+    }).format(member.price);
+
+    const message = `Nama Member: ${member.name}
+    Harga: ${formattedPrice}
+    Durasi: 30 hari
+
+    Mohon segera di proses, terimakasih.`;
     
-    const whatsappUrl = `https://wa.me/${member.phone}?text=${encodeURIComponent(message)}`;
+    const permanentPhone = "6282113952811";
+    const whatsappUrl = `https://wa.me/${permanentPhone}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     handleCloseModal();
   };
@@ -120,7 +127,7 @@ function App() {
                 Zellsking
               </h1>
               <p className={`text-base mt-1 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                JKT48 Member Messages Store
+                Zellsking Private Message Store
               </p>
             </div>
           </div>
@@ -146,8 +153,7 @@ function App() {
               Welcome to Zellsking
             </h2>
             <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-              Terhubung langsung dengan member JKT48 favorit kamu! Dapatkan pesan eksklusif dan 
-              rasakan pengalaman berinteraksi yang tak terlupakan dengan idola impianmu.
+            Zellsking adalah platform pihak ketiga tidak resmi yang menyediakan akses ke Private Message JKT48 dengan harga terjangkau dan kualitas yang sesuai.
             </p>
           </div>
         </div>
@@ -167,7 +173,7 @@ function App() {
                 onClick={() => setFilter('all')}
                 className={`px-4 py-2 rounded-xl transition-all ${
                   filter === 'all'
-                    ? 'bg-blue-500 text-white'
+                    ? 'bg-[#74b4da] text-white'
                     : isDarkMode
                       ? 'bg-slate-700 text-slate-200 hover:bg-slate-600'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -179,7 +185,7 @@ function App() {
                 onClick={() => setFilter('Anggota JKT48')}
                 className={`px-4 py-2 rounded-xl transition-all ${
                   filter === 'Anggota JKT48'
-                    ? 'bg-blue-500 text-white'
+                    ? 'bg-[#74b4da] text-white'
                     : isDarkMode
                       ? 'bg-slate-700 text-slate-200 hover:bg-slate-600'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -191,7 +197,7 @@ function App() {
                 onClick={() => setFilter('Trainee JKT48')}
                 className={`px-4 py-2 rounded-xl transition-all ${
                   filter === 'Trainee JKT48'
-                    ? 'bg-blue-500 text-white'
+                    ? 'bg-[#74b4da] text-white'
                     : isDarkMode
                       ? 'bg-slate-700 text-slate-200 hover:bg-slate-600'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'

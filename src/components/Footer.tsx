@@ -16,22 +16,20 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div>
+            <img 
+              src={isDarkMode 
+                ? "https://res.cloudinary.com/dlx2zm7ha/image/upload/v1752531509/light_j11zue.png" 
+                : "https://res.cloudinary.com/dlx2zm7ha/image/upload/v1752531509/dark_cfchom.png"
+              }
+              alt="Zellsking Logo"
+              className="w-12 h-12 mb-3 object-contain"
+            />
             <h3 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
               Zellsking
             </h3>
             <p className={`text-sm leading-relaxed mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-              Platform terpercaya untuk berinteraksi langsung dengan member JKT48 favorit Anda. 
-              Dapatkan pesan eksklusif dan pengalaman tak terlupakan.
+              Platform terpercaya dengan harga yang terjangkau untuk Private Message JKT48.
             </p>
-            <div className="flex items-center">
-              <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                Made with
-              </span>
-              <Heart className="w-4 h-4 text-red-500 mx-2" />
-              <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                for JKT48 fans
-              </span>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -54,20 +52,6 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
                   Leaderboard
                 </a>
               </li>
-              <li>
-                <a href="#" className={`text-sm hover:text-blue-500 transition-colors ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
-                }`}>
-                  How it Works
-                </a>
-              </li>
-              <li>
-                <a href="#" className={`text-sm hover:text-blue-500 transition-colors ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
-                }`}>
-                  Support
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -80,21 +64,16 @@ const Footer: React.FC<FooterProps> = ({ isDarkMode }) => {
               <div className="flex items-center">
                 <Mail className="w-4 h-4 text-blue-500 mr-3" />
                 <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                  support@zellsking.com
+                  hazelrafi909@gmail.com
                 </span>
               </div>
               <div className="flex items-center">
                 <Phone className="w-4 h-4 text-blue-500 mr-3" />
                 <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                  +62 812-3456-7890
+                  +62 821 1395 2811
                 </span>
               </div>
-              <div className="flex items-center">
-                <MapPin className="w-4 h-4 text-blue-500 mr-3" />
-                <span className={`text-sm ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-                  Jakarta, Indonesia
-                </span>
-              </div>
+
             </div>
           </div>
         </div>

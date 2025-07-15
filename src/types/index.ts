@@ -4,10 +4,10 @@ export interface Member {
   generation: string;
   price: number;
   image: string;
-  phone: string;
 }
 
 export interface TopIdol {
+  idol_group: string;
   user_id: string;
   idol_id: string;
   nickname: string;

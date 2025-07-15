@@ -16,10 +16,10 @@ const LeaderboardBanner: React.FC<LeaderboardBannerProps> = ({ onViewLeaderboard
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className={`p-3 rounded-xl mr-4 ${
-            isDarkMode ? 'bg-blue-100/80' : 'bg-blue-200/80'
+            isDarkMode ? 'bg-[#74b4da]' : 'bg-blue-200/80'
           }`}>
             <Trophy className={`w-6 h-6 ${
-              isDarkMode ? 'text-[#74b4da]' : 'text-[#74b4da]'
+              isDarkMode ? 'text-white' : 'text-[#74b4da]'
             }`} />
           </div>
           <div>

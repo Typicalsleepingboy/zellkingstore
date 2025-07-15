@@ -98,7 +98,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({
                   </span>
                 </div>
                 <span className={`font-semibold ${isDarkMode ? 'text-slate-200' : 'text-slate-800'}`}>
-                  30 days
+                  30 hari
                 </span>
               </div>
             </div>
