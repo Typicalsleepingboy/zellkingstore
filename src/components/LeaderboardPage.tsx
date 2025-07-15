@@ -14,7 +14,7 @@ const getCloudinaryUrl = (imagePath: string, options: { width?: number; height?:
   } = options;
 
   const baseUrl = `https://res.cloudinary.com/${import.meta.env.CLOUDINARY_CLOUD_NAME || 'your-cloud-name'}/image/fetch`;
-  
+
   const transformations = [
     `w_${width}`,
     `h_${height}`,
@@ -23,9 +23,9 @@ const getCloudinaryUrl = (imagePath: string, options: { width?: number; height?:
     `q_${quality}`,
     `f_${format}`
   ].join(',');
-  
+
   const sourceUrl = `https://production.jkt48pm.my.id${imagePath}`;
-  
+
   return `${baseUrl}/${transformations}/${encodeURIComponent(sourceUrl)}`;
 };
 
@@ -50,7 +50,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
       try {
         const response = await fetch('https://production.jkt48pm.my.id/api/top-idol');
         const data = await response.json();
-        
+
         if (data.success) {
           setTopIdols(data.data);
         } else {
@@ -75,12 +75,12 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
     if (imageErrors.has(idol.user_id)) {
       return getDefaultAvatar();
     }
-    
+
     // If no profile image, use default avatar
     if (!idol.profile_image) {
       return getDefaultAvatar();
     }
-    
+
     // Try to load via Cloudinary
     try {
       return getCloudinaryUrl(idol.profile_image, {
@@ -123,22 +123,22 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
 
   const getCardStyle = (index: number) => {
     if (index === 0) {
-      return isDarkMode 
-        ? 'bg-gradient-to-br from-amber-500/20 via-yellow-500/10 to-amber-500/20 border-amber-400/50 shadow-amber-500/20' 
+      return isDarkMode
+        ? 'bg-gradient-to-br from-amber-500/20 via-yellow-500/10 to-amber-500/20 border-amber-400/50 shadow-amber-500/20'
         : 'bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-50 border-amber-300/70 shadow-amber-300/20';
     }
     if (index === 1) {
-      return isDarkMode 
-        ? 'bg-gradient-to-br from-slate-500/20 via-slate-400/10 to-slate-500/20 border-slate-400/50 shadow-slate-400/20' 
+      return isDarkMode
+        ? 'bg-gradient-to-br from-slate-500/20 via-slate-400/10 to-slate-500/20 border-slate-400/50 shadow-slate-400/20'
         : 'bg-gradient-to-br from-slate-50 via-slate-50 to-slate-50 border-slate-300/70 shadow-slate-300/20';
     }
     if (index === 2) {
-      return isDarkMode 
-        ? 'bg-gradient-to-br from-orange-500/20 via-orange-400/10 to-orange-500/20 border-orange-400/50 shadow-orange-400/20' 
+      return isDarkMode
+        ? 'bg-gradient-to-br from-orange-500/20 via-orange-400/10 to-orange-500/20 border-orange-400/50 shadow-orange-400/20'
         : 'bg-gradient-to-br from-orange-50 via-orange-50 to-orange-50 border-orange-300/70 shadow-orange-300/20';
     }
-    return isDarkMode 
-      ? 'bg-slate-800/40 border-slate-700/40 shadow-slate-800/20' 
+    return isDarkMode
+      ? 'bg-slate-800/40 border-slate-700/40 shadow-slate-800/20'
       : 'bg-white/80 border-slate-200/40 shadow-slate-200/20';
   };
 
@@ -148,27 +148,25 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
         <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <button
             onClick={onBack}
-            className={`flex items-center mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 ${
-              isDarkMode 
-                ? 'bg-slate-800/60 text-white border border-slate-700/60 hover:bg-slate-700/60' 
+            className={`flex items-center mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 ${isDarkMode
+                ? 'bg-slate-800/60 text-white border border-slate-700/60 hover:bg-slate-700/60'
                 : 'bg-white/80 text-slate-800 border border-slate-200/60 hover:bg-white/90'
-            } backdrop-blur-md shadow-lg`}
+              } backdrop-blur-md shadow-lg`}
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             <span className="text-sm sm:text-base">Back to Members</span>
           </button>
-          
+
           <div className="text-center mb-12 sm:mb-16">
             <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6">
               <div className="relative mb-4 sm:mb-0">
                 <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-amber-400 animate-pulse" />
                 <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400 absolute -top-1 -right-1 sm:-top-2 sm:-right-2 animate-bounce" />
               </div>
-              <h1 className={`text-3xl sm:text-5xl font-bold sm:ml-6 bg-gradient-to-r ${
-                isDarkMode 
-                  ? 'from-white via-slate-200 to-white' 
+              <h1 className={`text-3xl sm:text-5xl font-bold sm:ml-6 bg-gradient-to-r ${isDarkMode
+                  ? 'from-white via-slate-200 to-white'
                   : 'from-slate-900 via-slate-700 to-slate-900'
-              } bg-clip-text text-transparent`}>
+                } bg-clip-text text-transparent`}>
                 Member Leaderboard
               </h1>
             </div>
@@ -179,11 +177,10 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
 
           <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className={`p-4 sm:p-8 rounded-xl sm:rounded-2xl border backdrop-blur-md shadow-xl animate-pulse ${
-                isDarkMode 
-                  ? 'bg-slate-800/40 border-slate-700/40' 
+              <div key={i} className={`p-4 sm:p-8 rounded-xl sm:rounded-2xl border backdrop-blur-md shadow-xl animate-pulse ${isDarkMode
+                  ? 'bg-slate-800/40 border-slate-700/40'
                   : 'bg-white/80 border-slate-200/40'
-              }`}>
+                }`}>
                 <div className="flex items-center">
                   <div className="flex items-center mr-4 sm:mr-8">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-300 rounded-lg sm:rounded-xl"></div>
@@ -191,7 +188,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
                       <div className="w-6 h-6 sm:w-8 sm:h-8 bg-slate-300 rounded-full"></div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center flex-1">
                     <div className="w-16 h-16 sm:w-20 sm:h-20 bg-slate-300 rounded-xl sm:rounded-2xl mr-4 sm:mr-8"></div>
                     <div className="flex-1 min-w-0">
@@ -215,16 +212,15 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
         <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <button
             onClick={onBack}
-            className={`flex items-center mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 ${
-              isDarkMode 
-                ? 'bg-slate-800/60 text-white border border-slate-700/60 hover:bg-slate-700/60' 
+            className={`flex items-center mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 ${isDarkMode
+                ? 'bg-slate-800/60 text-white border border-slate-700/60 hover:bg-slate-700/60'
                 : 'bg-white/80 text-slate-800 border border-slate-200/60 hover:bg-white/90'
-            } backdrop-blur-md shadow-lg`}
+              } backdrop-blur-md shadow-lg`}
           >
             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             <span className="text-sm sm:text-base">Back to Members</span>
           </button>
-          
+
           <div className="text-center">
             <Trophy className="w-16 h-16 sm:w-20 sm:h-20 text-slate-400 mx-auto mb-4 sm:mb-6" />
             <h2 className={`text-2xl sm:text-3xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
@@ -244,27 +240,25 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <button
           onClick={onBack}
-          className={`flex items-center mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 ${
-            isDarkMode 
-              ? 'bg-slate-800/60 text-white border border-slate-700/60 hover:bg-slate-700/60' 
+          className={`flex items-center mb-6 sm:mb-8 px-4 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 ${isDarkMode
+              ? 'bg-slate-800/60 text-white border border-slate-700/60 hover:bg-slate-700/60'
               : 'bg-white/80 text-slate-800 border border-slate-200/60 hover:bg-white/90'
-          } backdrop-blur-md shadow-lg`}
+            } backdrop-blur-md shadow-lg`}
         >
           <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
           <span className="text-sm sm:text-base">Back to Members</span>
         </button>
-        
+
         <div className="text-center mb-12 sm:mb-16">
           <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6">
             <div className="relative mb-4 sm:mb-0">
               <Trophy className="w-12 h-12 sm:w-16 sm:h-16 text-amber-400" />
               <Sparkles className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400 absolute -top-1 -right-1 sm:-top-2 sm:-right-2 animate-bounce" />
             </div>
-            <h1 className={`text-3xl sm:text-5xl font-bold sm:ml-6 bg-gradient-to-r ${
-              isDarkMode 
-                ? 'from-white via-slate-200 to-white' 
+            <h1 className={`text-3xl sm:text-5xl font-bold sm:ml-6 bg-gradient-to-r ${isDarkMode
+                ? 'from-white via-slate-200 to-white'
                 : 'from-slate-900 via-slate-700 to-slate-900'
-            } bg-clip-text text-transparent`}>
+              } bg-clip-text text-transparent`}>
               Member Leaderboard
             </h1>
           </div>
@@ -294,7 +288,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
                     {getRankIcon(index)}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="relative flex-shrink-0">
                     <img
@@ -309,7 +303,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <h3 className={`font-bold text-lg sm:text-2xl mb-2 sm:mb-3 truncate ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
                       {idol.nickname}
@@ -328,7 +322,7 @@ const LeaderboardPage: React.FC<LeaderboardPageProps> = ({ isDarkMode, onBack })
                         <div className="flex items-center">
                           <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 mr-1" />
                           <span className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-                            Top Performer
+                            Top Private Message
                           </span>
                         </div>
                       )}
